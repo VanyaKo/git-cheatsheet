@@ -17,18 +17,14 @@
 * Статус `modified` означает, что файл был изменён.
 * Большинство файлов в проектах «шагает» по следующему циклу: __*изменён*__ → **_добавлен в список на коммит_** → ***закоммичен*** → ___изменён___ → и так далее.
 
-Типичный жизненный цикл файла в Git
+Типичный жизненный цикл файла в Git. Диаграмма нарисована с помощью [Mermaid](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/ "Описание и пример кода") 
 ```mermaid
-sequenceDiagram
-    participant untracked
-    participant staged
-    participant modified
-    participant tracked
-    untracked->>staged: git add
-    staged->>modified: изменения
-    modified->>staged: git add
-    staged->>tracked: git commit
-    tracked->>modified: изменения
+graph LR;
+    untracked -- "git add" --> staged/tracked;
+    staged/tracked -- "изменения" --> modified;
+    modified -- "git add" --> staged/tracked;
+    staged/tracked -- "git commit" --> tracked;
+    tracked -- "изменения" --> modified;
 ```
 ### Оформление сообщений к коммитам
 Сообщения ценятся, когда они:
